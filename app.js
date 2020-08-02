@@ -29,6 +29,11 @@ app.get("/about",function(req,res){
   res.render("about",{paragraph:paragraphContent});
 });
 
+// contact route get request 
+app.get("/contact",function(req,res){
+  paragraphContent = contactContent;
+  res.render("contact",{paragraph:paragraphContent});
+});
 
 app.listen(3000, function() {
   console.log("Server started on port 3000");
