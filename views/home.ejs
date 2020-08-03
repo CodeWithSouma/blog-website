@@ -5,7 +5,11 @@
 <p><%= paragraph %></p>
 <% allPost.forEach(function(post){ %>
     <h1><%= post.title %></h1>
-    <p><%= post.content %></p>
+    <p>
+        <%= post.content.substring(0,100).concat("...") %>
+        <a href="/posts/<%=post.title%>">(Read More)</a>
+    </p>
+    
 <%})%>
 
 <!-- link footer -->
