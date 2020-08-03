@@ -3,6 +3,10 @@
 
 <h1>Home</h1>
 <p><%= paragraph %></p>
+<% allPost.forEach(function(post){ %>
+    <h1><%= post.title %></h1>
+    <p><%= post.content %></p>
+<%})%>
 
 <!-- link footer -->
 <%- include("partials/footer"); -%>
