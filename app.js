@@ -20,9 +20,6 @@ const postSchema = new mongoose.Schema({
 // create a model based on postSchema
 const Post = new mongoose.model("Post",postSchema);
 
-// this array for store all post object
-let posts = [];
-
 const app = express();
 
 app.set('view engine', 'ejs');
@@ -56,16 +53,16 @@ app.get("/compose",function(req,res){
 });
 
 // /post/:parameter get route
-app.get("/posts/:postName",function(req,res){
-  // chake post is present in posts array or not 
-
-  posts.forEach(function(post){
-    //using lodash module convert lower case string
-    // example:_.lowerCase('--Foo-Bar--'); =>'foo bar'
-    if( _.lowerCase(post.title) === _.lowerCase(req.params.postName)){
-      res.render("post",{postTitle:post.title,postContent:post.content})
-    };
- 
+app.get("/posts/:postID",function(req,res){
+// collect post id from request 
+  const postID = req.params.postID;
+  //find thee document besed on post id and create a webpage using ejs post template and send back
+  Post.findById(postID,function(err,foundPost){
+    if(!err){
+      if(foundPost){
+        res.render("post",{postTitle:foundPost.title,postContent:foundPost.content});
+      }
+    }
   });
  
 
@@ -77,7 +74,7 @@ app.post("/compose",function(req,res){
   const postContent = req.body.postBody.trim();
   //create a new post using model
   const newPost = new Post({
-    title:postTitle,
+    title:_.capitalize(postTitle),//use for convert string to title case
     content:postContent
   });
   newPost.save();
