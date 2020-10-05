@@ -10,8 +10,11 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.3",
+    "compression": "^1.7.4",
+    "config": "^3.3.2",
     "ejs": "^2.6.1",
     "express": "^4.16.3",
+    "helmet": "^4.1.1",
     "lodash": "^4.17.19",
     "mongoose": "^5.9.28"
   },
